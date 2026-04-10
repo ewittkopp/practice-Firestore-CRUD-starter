@@ -6,7 +6,7 @@ import { User, UserService } from './user.service';
   selector: 'app-root',
   imports: [FormsModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   title = 'practice-firestore-crud';
@@ -18,17 +18,17 @@ export class App {
   email = signal<string>('');
 
   // This is the hook method that will be called when the component is initialized
-  ngOnInit(){
-   
+  ngOnInit() {
+    this.userService.loadUsers();
   }
   //method called when user clicks on the Add User button.
   addUser() {
-    
+    const user: User = { name: this.name(), email: this.email() };
+    this.userService.addUser(user);
   }
   //resets form
   resetForm() {
     this.name.set('');
     this.email.set('');
   }
-
 }

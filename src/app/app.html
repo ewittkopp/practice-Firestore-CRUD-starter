@@ -9,21 +9,17 @@
     />
   </div>
   <div>
-    <input
-      type="text"
-      class="form-control w-50 mb-1"
-      [(ngModel)]="email"
-      placeholder="Email"
-    />
+    <input type="text" class="form-control w-50 mb-1" [(ngModel)]="email" placeholder="Email" />
   </div>
 
   <div>
-    <button class="btn btn-outline-primary" (click)="addUser()">
-      Add User
-    </button>
+    <button class="btn btn-outline-primary" (click)="addUser()">Add User</button>
   </div>
   <hr />
   <div>
     <h2>List of Users</h2>
+    @for(user of userService.users(); track $index){
+    <div>{{ $index + 1 }} : {{ user.id }} : {{ user.name }} : {{ user.email }}</div>
+    }
   </div>
 </div>
