@@ -13,13 +13,23 @@
   </div>
 
   <div>
+    @if(selectedUser()){
+    <button class="btn btn-outline-primary" (click)="updateUser()">Update User</button>
+    } @else{
     <button class="btn btn-outline-primary" (click)="addUser()">Add User</button>
+    }
   </div>
   <hr />
   <div>
     <h2>List of Users</h2>
     @for(user of userService.users(); track $index){
-    <div>{{ $index + 1 }} : {{ user.id }} : {{ user.name }} : {{ user.email }}</div>
+    <div>
+      {{ $index + 1 }} : {{ user.id }} : {{ user.name }} : {{ user.email }}
+      <button class="btn btn-outline-primary m-1" (click)="selectUser(user)">Edit</button>
+      <button class="btn btn-outline-danger m-1" (click)="userService.deleteUser(user.id!)">
+        Delete
+      </button>
+    </div>
     }
   </div>
 </div>

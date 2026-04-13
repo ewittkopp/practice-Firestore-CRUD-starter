@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { addDoc, collection, onSnapshot } from '@firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from '@firebase/firestore';
 import { db } from './firebase.config';
 
 export interface User {
@@ -39,5 +39,14 @@ export class UserService {
   }
   //UPDATE
 
+  async updateUser(id: string, user: Partial<User>) {
+    const userRef = doc(db, 'users', id);
+    await updateDoc(userRef, user);
+  }
+
   //DELETE
+  async deleteUser(id: string) {
+    const userRef = doc(db, 'users', id);
+    await deleteDoc(userRef);
+  }
 }
